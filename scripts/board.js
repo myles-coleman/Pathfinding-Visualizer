@@ -2,8 +2,6 @@
 const height = 5;
 const width = 15;
 const nodes = [];
-let startNode;
-let endNode;
 
 const createGrid = () => {
     for (let row = 1; row <= height; row++) {
@@ -12,7 +10,7 @@ const createGrid = () => {
         for (let col = 1; col <= width; col++) {
 
             let node = document.createElement('div');
-            node.id = "node"
+            node.id = "node";
             node.className = 'node' + '_'+ [row].toString() + '_' + [col].toString();
             //classnames are: node_1_1 (node_row_col)
 
@@ -20,11 +18,22 @@ const createGrid = () => {
             currentRow.push(node);
             
         }
-        nodes.push(currentRow);
-        
+        nodes.push(currentRow);   
     }
-    startNode = document.getElementsByClassName('node_3_2');
-    endNode = document.getElementsByClassName('node_3_14');
+}
+
+
+document.addEventListener("DomContentLoaded", () => {
+    document.getElementById("node").addEventListener("mousedown", () => {
+
+        changeColor();
+        
+    });
+});
+
+const changeColor = () => {
+
+    document.getElementById("node").style.background = "black";
 }
 
 const clearGrid = () => {
