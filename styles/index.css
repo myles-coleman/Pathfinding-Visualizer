@@ -1,0 +1,31 @@
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#container {
+    position: relative;
+    top: 150px;
+    outline:2px solid #000;
+    font-size: 1;
+    margin:auto;
+    height:200px;
+    width:600px;
+    padding: 0;
+    border: none;
+}
+
+#node {
+    width: 40px;
+    height: 40px;
+    outline: 1px solid #000000;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.node_3_2 {
+    background-color: blue;
+}
+
+.node_3_14 {
+    background-color: green;
+}
