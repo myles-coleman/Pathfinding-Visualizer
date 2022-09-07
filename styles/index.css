@@ -8,8 +8,8 @@ p, h1, h2, h3, h4, h5, h6 {
     outline:2px solid #000;
     font-size: 1;
     margin:auto;
-    height:200px;
-    width:600px;
+    height:800px;
+    width:1800px;
     padding: 0;
     border: none;
 }
@@ -22,10 +22,10 @@ p, h1, h2, h3, h4, h5, h6 {
     vertical-align: top;
 }
 
-.node_3_2 {
+.node_10_7 {
     background-color: blue;
 }
 
-.node_3_14 {
+.node_10_38 {
     background-color: green;
 }
