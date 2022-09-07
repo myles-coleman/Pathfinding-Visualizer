@@ -1,6 +1,6 @@
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
-const height = 5;
-const width = 15;
+const height = 20;
+const width = 45;
 const nodes = [];
 
 const createGrid = () => {
@@ -12,17 +12,18 @@ const createGrid = () => {
             let node = document.createElement('div');
             node.id = "node";
             node.className = 'node' + '_'+ [row].toString() + '_' + [col].toString();
-
-            node.addEventListener("click", () => {
-                node.style.background = "black";
-                console.log("color changed");
-                
-            });
             //classnames are: node_1_1 (node_row_col)
+            node.draggable = true;
+            node.addEventListener("dragover", () => { 
+
+                if (node.className != "node_10_7" && node.className != "node_10_38") {
+
+                    node.style.background = "black" ;
+                }
+            });
 
             document.getElementById("container").appendChild(node);
             currentRow.push(node);
-            
         }
         nodes.push(currentRow);   
     }
