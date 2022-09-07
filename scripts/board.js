@@ -12,6 +12,12 @@ const createGrid = () => {
             let node = document.createElement('div');
             node.id = "node";
             node.className = 'node' + '_'+ [row].toString() + '_' + [col].toString();
+
+            node.addEventListener("click", () => {
+                node.style.background = "black";
+                console.log("color changed");
+                
+            });
             //classnames are: node_1_1 (node_row_col)
 
             document.getElementById("container").appendChild(node);
@@ -20,20 +26,6 @@ const createGrid = () => {
         }
         nodes.push(currentRow);   
     }
-}
-
-
-document.addEventListener("DomContentLoaded", () => {
-    document.getElementById("node").addEventListener("mousedown", () => {
-
-        changeColor();
-        
-    });
-});
-
-const changeColor = () => {
-
-    document.getElementById("node").style.background = "black";
 }
 
 const clearGrid = () => {
