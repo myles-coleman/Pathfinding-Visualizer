@@ -23,18 +23,13 @@ const createGrid = () => {
 }
 
 
-document.addEventListener("DomContentLoaded", () => {
-    document.getElementById("node").addEventListener("mousedown", () => {
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("node").addEventListener("click", () => {
 
-        changeColor();
-        
-    });
+        document.getElementById("node").style.background = "purple";
+        console.log("color changed");
+    })
 });
-
-const changeColor = () => {
-
-    document.getElementById("node").style.background = "black";
-}
 
 const clearGrid = () => {
     document.getElementById("container").replaceChildren();
