@@ -12,16 +12,13 @@ const createGrid = () => {
             let node = document.createElement('div');
             node.id = "node";
             node.className = 'node' + '_'+ [row].toString() + '_' + [col].toString();
-            //classnames are: node_1_1 (node_row_col)
             node.draggable = true;
+            //add wall class to the nodes that are dragged over with left click
             node.addEventListener("dragover", () => { 
-
                 if (node.className != "node_10_7" && node.className != "node_10_38") {
-
-                    node.style.background = "black" ;
+                    node.classList.add("wall");
                 }
             });
-
             document.getElementById("container").appendChild(node);
             currentRow.push(node);
         }
