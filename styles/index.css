@@ -14,7 +14,7 @@ p, h1, h2, h3, h4, h5, h6 {
     border: none;
 }
 
-#node {
+.node {
     width: 40px;
     height: 40px;
     outline: 1px solid #000000;
@@ -26,10 +26,10 @@ p, h1, h2, h3, h4, h5, h6 {
     background-color: black;
 }
 
-.node_10_7 {
+#node-10-7 {
     background-color: blue;
 }
 
-.node_10_38 {
+#node-10-38 {
     background-color: green;
 }
