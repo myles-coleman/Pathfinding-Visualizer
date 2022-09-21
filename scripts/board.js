@@ -30,10 +30,22 @@ const createGrid = () => {
     }
 }
 
-const printNodes = (arr) => {
-  for (let i = 0; i < arr.length; i++) {
-      console.log(arr[i]);
+
+const printNodes = (grid) => {
+  for (let i = 0; i < grid.length; i++) {
+      console.log(grid[i]);
   }
+}
+
+//takes a matrix of nodes and returns them in a single file array
+const getNodes = (grid) => {
+  const nodes = []
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      nodes.push(grid[i][j]);
+    }
+  }
+  return nodes;
 }
 
 //attatching method for refreshing grid to the event listener
