@@ -6,43 +6,57 @@ const nodes = [];
 const createGrid = () => {
     for (let row = 1; row <= height; row++) {
         const currentRow = [];
-
         for (let col = 1; col <= width; col++) {
 
             let node = document.createElement('div');
-            node.id = "node";
-            node.className = 'node' + '_'+ [row].toString() + '_' + [col].toString();
-            //classnames are: node_1_1 (node_row_col)
+            let node_start = document.getElementById("node-10-7");
+            let node_finish = document.getElementById("node-10-38");
+            node.className = "node";
+            node.id = 'node' + '-'+ [row].toString() + '-' + [col].toString();
+            
+            //add wall class to the nodes that are dragged over with left click
             node.draggable = true;
             node.addEventListener("dragover", () => { 
-
-                if (node.className != "node_10_7" && node.className != "node_10_38") {
-
-                    node.style.background = "black" ;
+                if (node != node_start && node != node_finish) {
+                    node.classList.add("wall");
                 }
             });
 
-            document.getElementById("container").appendChild(node);
-            currentRow.push(node);
+            //appends nodes to the container div and also pushes nodes into an array for easy access
+            document.getElementById("container").appendChild(node); 
+            currentRow.push(node); 
         }
         nodes.push(currentRow);   
     }
 }
 
-const clearGrid = () => {
-    document.getElementById("container").replaceChildren();
+
+const printNodes = (grid) => {
+  for (let i = 0; i < grid.length; i++) {
+      console.log(grid[i]);
+  }
 }
 
-const refreshGrid = () => {
-    clearGrid();
+//takes a matrix of nodes and returns them in a single file array
+const getNodes = (grid) => {
+  const nodes = []
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      nodes.push(grid[i][j]);
+    }
+  }
+  return nodes;
+}
+
+//attatching method for refreshing grid to the event listener
+document.getElementById("refresh").addEventListener("click", () => {
+    document.getElementById("container").replaceChildren();
     createGrid();
     console.log("grid refreshed");
-}
+});
 
-const printNodes = (arr) => {
-    for (i = 0; i < arr.length; i++) {
-        console.log(arr[i]);
-    }
-}
+document.getElementById("print").addEventListener("click", () => {
+  printNodes(nodes);
+});
 
 window.onload = createGrid;

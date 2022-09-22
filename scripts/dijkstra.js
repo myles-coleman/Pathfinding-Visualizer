@@ -1,10 +1,32 @@
-let arr = [1, 2, 3, 4, 5, 6, 7, 8];
+// Performs Dijkstra's algorithm; returns *all* nodes in the order
+// in which they were visited. Also makes nodes point back to their
+// previous node, effectively allowing us to compute the shortest path
+// by backtracking from the finish node.
+export function dijkstra(grid, startNode, finishNode) {
 
-const dijkstra = (graphArray, source) => {
+  }
+  
+  function sortNodesByDistance(unvisitedNodes) {
 
-    for (let i = 0; i < graphArray.length; i++) {
-        console.log(graphArray[i]);
-    }
-}
 
-dijkstra(arr); 
+  }
+  
+  function updateUnvisitedNeighbors(node, grid) {
+
+  }
+  
+  function getUnvisitedNeighbors(node, grid) {
+
+  }
+
+
+  //function that returns array of nodes
+  function getAllNodes(grid) {
+
+  }
+  
+  // Backtracks from the finishNode to find the shortest path.
+  // Only works when called *after* the dijkstra method above.
+  export function getNodesInShortestPathOrder(finishNode) {
+
+  }
