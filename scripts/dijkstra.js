@@ -5,10 +5,17 @@
 export function dijkstra(grid, startNode, finishNode) {
 
   }
+
+  //create function that returns distance of nodes from starting node
+
+  function getNodeDistance(node) {
+
+    //need to implement css parser so i can grab node location from style
+
+  }
   
   function sortNodesByDistance(unvisitedNodes) {
-
-
+    unvisitedNodes.sort();
   }
   
   function updateUnvisitedNeighbors(node, grid) {
@@ -16,7 +23,8 @@ export function dijkstra(grid, startNode, finishNode) {
   }
   
   function getUnvisitedNeighbors(node, grid) {
-
+    const neighbors = [];
+    
   }
 
 
