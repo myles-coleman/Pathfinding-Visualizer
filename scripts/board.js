@@ -7,8 +7,8 @@ const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 38;
 const grid = [];
 
-//const startNode = grid[START_NODE_ROW][START_NODE_COL];
-//const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+let startNode;
+let finishNode;
 
 //function to create node object
 const createNode = (col, row) => {
@@ -24,32 +24,6 @@ const createNode = (col, row) => {
 	};
 };
 
-//creates and returns grid of nodes
-const createGrid = () => {
-	for (let row = 0; row < height; row++) {
-	  	const currentRow = [];
-	  	for (let col = 0; col < width; col++) {
-
-			let node = createNode(row, col);
-			//add draggable event listener, and isWall if object != startNode || finishNode
-
-			//node.classList.add(`node ${extraClassName}`);
-			//node.setAttribute('id',`node-${row}-${col}`);
-
-			//document.getElementById("container").appendChild(node);
-			currentRow.push(node);
-	  	}
-	  	grid.push(currentRow);
-	}
-};
-
-//prints grid of nodes to console
-const printNodes = (grid) => {
-	for (let i = 0; i < grid.length; i++) {
-		console.log(grid[i]);
-	}
-}
-
 //takes grid of nodes and returns 1D array of nodes
 const getNodes = (grid) => {
 	const nodes = []
@@ -59,6 +33,41 @@ const getNodes = (grid) => {
 	  	}
 	}
 	return nodes;
+}
+
+const setNodes = (grid) => {
+  let nodes = getNodes(grid);
+  let startIndex = ((START_NODE_ROW - 1) * height) + START_NODE_COL;
+  let finishIndex = ((FINISH_NODE_ROW - 1) * height) + FINISH_NODE_COL;
+  startNode = nodes[startIndex];
+  finishNode = nodes[finishIndex];
+}
+
+//creates and returns grid of nodes
+const createGrid = () => {
+	for (let row = 1; row <= height; row++) {
+	  	const currentRow = [];
+	  	for (let col = 1; col <= width; col++) {
+
+			let node = createNode(row, col);
+			//add draggable event listener, and isWall if object != startNode || finishNode
+
+			//node.classList.add(`node ${extraClassName}`);
+			//node.setAttribute('id',`node-${row}-${col}`);
+
+			//document.getElementById("container").appendChild();
+			currentRow.push(node);
+	  	}
+	  	grid.push(currentRow);
+	}
+  setNodes(grid);
+}
+
+//prints grid of nodes to console
+const printNodes = (grid) => {
+	for (let i = 0; i < grid.length; i++) {
+		console.log(grid[i]);
+	}
 }
 
 //attatching method for refreshing grid to the event listener
