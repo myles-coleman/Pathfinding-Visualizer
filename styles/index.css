@@ -27,9 +27,9 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .node-start {
-    background-color: blue;
+    background-color: rgb(104, 104, 255);
 }
 
 .node-finish {
-    background-color: green;
+    background-color: rgb(174, 0, 255);
 }
