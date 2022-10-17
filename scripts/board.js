@@ -6,7 +6,7 @@ const START_NODE_COL = 7;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 38;
 const grid = [];
-
+const divGrid = [];
 let startNode;
 let finishNode;
 
@@ -37,7 +37,7 @@ const getNodes = (grid) => {
 
 const setNodes = (grid) => {
   let nodes = getNodes(grid);
-  let startIndex = ((START_NODE_ROW - 1) * height) + START_NODE_COL;
+  let startIndex = ((START_NODE_ROW - 1) * width) + START_NODE_COL;
   let finishIndex = ((FINISH_NODE_ROW - 1) * height) + FINISH_NODE_COL;
   startNode = nodes[startIndex];
   finishNode = nodes[finishIndex];
@@ -47,26 +47,50 @@ const setNodes = (grid) => {
 const createGrid = () => {
 	for (let row = 1; row <= height; row++) {
 	  	const currentRow = [];
+		const currentRow2 = [];
 	  	for (let col = 1; col <= width; col++) {
 
-			let node = createNode(row, col);
-			//add draggable event listener, and isWall if object != startNode || finishNode
+			let node = createNode(col, row);
+			let divNode = document.createElement('div');
 
-			//node.classList.add(`node ${extraClassName}`);
-			//node.setAttribute('id',`node-${row}-${col}`);
+			divNode.className = "node";
+			divNode.setAttribute('id',`node-${row}-${col}`);
+			
+			if (node.isStart) {
+				divNode.classList.add('node-start');
+			} else if (node.isFinish) {
+				divNode.classList.add('node-finish');
+			}
+			
+			//add wall class to the nodes that are dragged over with left click
+            divNode.draggable = true;
+            divNode.addEventListener("dragover", () => { 
+                if (!node.isStart && !node.isFinish) {
+					divNode.classList.add('node-wall');
+            	}
+			});
 
-			//document.getElementById("container").appendChild();
+			//append divNodes to container and push nodes and divNodes to their respective arrays 
+			document.getElementById("container").appendChild(divNode);
 			currentRow.push(node);
+			currentRow2.push(divNode);
 	  	}
 	  	grid.push(currentRow);
+		divGrid.push(currentRow2);
 	}
-  setNodes(grid);
+  	setNodes(grid);
 }
 
 //prints grid of nodes to console
 const printNodes = (grid) => {
+	/*
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
+	}
+	*/
+
+	for (let i = 0; i < getNodes(grid).length; i++) {
+		console.log(getNodes(grid)[i]);
 	}
 }
 
@@ -78,7 +102,7 @@ document.getElementById("refresh").addEventListener("click", () => {
 });
 
 document.getElementById("print").addEventListener("click", () => {
-  printNodes(grid);
+  printNodes(divGrid);
 });
 
 window.onload = createGrid;

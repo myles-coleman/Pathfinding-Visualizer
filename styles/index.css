@@ -22,14 +22,14 @@ p, h1, h2, h3, h4, h5, h6 {
     vertical-align: top;
 }
 
-.wall {
+.node-wall {
     background-color: black;
 }
 
-#node-10-7 {
+.node-start {
     background-color: blue;
 }
 
-#node-10-38 {
+.node-finish {
     background-color: green;
 }
