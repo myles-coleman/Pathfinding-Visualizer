@@ -99,7 +99,7 @@ const visualizeDijkstra = () => {
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
 
-//prints grid of nodes to console
+/*
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
@@ -113,6 +113,7 @@ const printNeighbors = (node, grid) => {
 		console.log(neighbors[i]);
 	}
 }
+*/
 
 //attatching methods to buttons with event listeners
 document.getElementById("refresh").addEventListener("click", () => {
@@ -121,6 +122,8 @@ document.getElementById("refresh").addEventListener("click", () => {
     console.log("grid refreshed");
 });
 
+/*
+
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(divGrid);
 });
@@ -128,6 +131,8 @@ document.getElementById("print").addEventListener("click", () => {
 document.getElementById("print-extra").addEventListener("click", () => {
 	printNeighbors(getNodes(grid)[startIndex], grid);
 });
+
+*/
 
 document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
