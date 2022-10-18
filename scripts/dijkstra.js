@@ -26,7 +26,6 @@ const sortNodesByDistance = (unvisitedNodes) => {
 }
   
 const updateUnvisitedNeighbors = (node, grid) => {
-
 	const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
     for (const neighbor of unvisitedNeighbors) {
       neighbor.distance = node.distance + 1;
@@ -34,8 +33,8 @@ const updateUnvisitedNeighbors = (node, grid) => {
     }
 }
 
-//checks adjacent nodes. Since I cant use matrix[][], i might have to use normal array index to check adjacent nodes.
-const getUnvisitedNeighbors = (node, grid) => {
+//checks adjacent nodes
+const getUnvisitedNeighbors = (node, grid) => { //need to fix this function
 
     const neighbors = [];
     const {col, row} = node;
@@ -65,6 +64,7 @@ const getUnvisitedNeighbors = (node, grid) => {
 		neighbors.push(nodeArr[index]);
 	}
 
+	// returns new array that filters out visited neighbors
     return neighbors.filter(neighbor => !neighbor.isVisited);
 }
 
@@ -79,15 +79,14 @@ export const getNodes = (grid) => {
 	return nodes;
 }
   
-// Backtracks from the finishNode to find the shortest path.
+// Starts from the finishNode and returns an array of nodes for the shortest path to the startNode.
 export const getNodesInShortestPathOrder = (finishNode) => {
 
 	const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
     while (currentNode !== null) {
-      nodesInShortestPathOrder.unshift(currentNode);
-      currentNode = currentNode.previousNode;
+		nodesInShortestPathOrder.unshift(currentNode);
+		currentNode = currentNode.previousNode;
     }
     return nodesInShortestPathOrder;
-
 }

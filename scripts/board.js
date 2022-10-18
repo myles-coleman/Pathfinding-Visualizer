@@ -63,13 +63,6 @@ const createGrid = () => {
 	}
 }
 
-//prints grid of nodes to console
-const printNodes = (grid) => {
-	for (let i = 0; i < grid.length; i++) {
-		console.log(grid[i]);
-	}
-}
-
 const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
 		if (i === visitedNodesInOrder.length) {
@@ -80,8 +73,7 @@ const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
 		}
 		setTimeout(() => {
 			const node = visitedNodesInOrder[i];
-			document.getElementById(`node-${node.row}-${node.col}`).className =
-			'node node-visited';
+			document.getElementById(`node-${node.row}-${node.col}`).classList.add('node-visited');
 			node.isVisited = true;
 		}, 10 * i);
     }
@@ -91,8 +83,7 @@ const animateShortestPath = (nodesInShortestPathOrder) => {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
 		setTimeout(() => {
 			const node = nodesInShortestPathOrder[i];
-			document.getElementById(`node-${node.row}-${node.col}`).className =
-			'node node-shortest-path';
+			document.getElementById(`node-${node.row}-${node.col}`).classList.add('node-shortest-path');
 		}, 50 * i);
     }
 }
@@ -100,13 +91,20 @@ const animateShortestPath = (nodesInShortestPathOrder) => {
 const visualizeDijkstra = () => {
 	let nodes = getNodes(grid);
 	let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
-	let finishIndex = (FINISH_NODE_ROW * height) + FINISH_NODE_COL + 1;
+	let finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 	const startNode = nodes[startIndex];
 	const finishNode = nodes[finishIndex];
 
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+}
+
+//prints grid of nodes to console
+const printNodes = (grid) => {
+	for (let i = 0; i < grid.length; i++) {
+		console.log(grid[i]);
+	}
 }
 
 //attatching method for refreshing grid to the event listener
@@ -122,6 +120,7 @@ document.getElementById("print").addEventListener("click", () => {
 
 document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
+	console.log("started visualization");
 });
 
 window.onload = createGrid;
