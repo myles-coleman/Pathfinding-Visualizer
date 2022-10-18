@@ -5,7 +5,7 @@
 export const dijkstra = (grid, startNode, finishNode) => {
 	const visitedNodesInOrder = [];
     startNode.distance = 0;
-    const unvisitedNodes = getAllNodes(grid);
+    const unvisitedNodes = getNodes(grid);
     while (!!unvisitedNodes.length) {
 		sortNodesByDistance(unvisitedNodes);
 		const closestNode = unvisitedNodes.shift();
@@ -32,19 +32,40 @@ const updateUnvisitedNeighbors = (node, grid) => {
       neighbor.distance = node.distance + 1;
       neighbor.previousNode = node;
     }
-
 }
-  
+
+//checks adjacent nodes. Since I cant use matrix[][], i might have to use normal array index to check adjacent nodes.
 const getUnvisitedNeighbors = (node, grid) => {
 
     const neighbors = [];
     const {col, row} = node;
-    if (row > 0) neighbors.push(grid[row - 1][col]);
-    if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
-    if (col > 0) neighbors.push(grid[row][col - 1]);
-    if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
+
+	const width = 45;
+	let index = (row * width) + col + 1;
+	const nodeArr = getNodes(grid);
+	
+	//check if up
+	if (row > 0) {
+		index -= width;
+		neighbors.push(nodeArr[index]);
+	}
+	//check if down
+	if (row < grid.length - 1) {
+		index += width;
+		neighbors.push(nodeArr[index]);
+	}
+	//check if right
+	if (col > 0) {
+		index += 1;
+		neighbors.push(nodeArr[index]);
+	}
+	//check if left
+	if (col < grid[0].length - 1) {
+		index -= 1;
+		neighbors.push(nodeArr[index]);
+	}
+
     return neighbors.filter(neighbor => !neighbor.isVisited);
-    
 }
 
 //takes grid of nodes and returns 1D array of nodes
@@ -52,7 +73,7 @@ export const getNodes = (grid) => {
 	const nodes = []
 	for (let i = 0; i < grid.length; i++) {
 	  	for (let j = 0; j < grid[i].length; j++) {
-		nodes.push(grid[i][j]);
+			nodes.push(grid[i][j]);
 	  	}
 	}
 	return nodes;
