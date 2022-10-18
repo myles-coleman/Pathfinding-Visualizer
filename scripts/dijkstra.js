@@ -40,42 +40,29 @@ export const getUnvisitedNeighbors = (node, grid) => {
     const {col, row} = node;
 
 	const width = 45;
-	let index = (row * width) + col;
+	const index = (row * width) + col; //issue
 	const nodeArr = getNodes(grid);
 
-	//test case is (row 9, col 7)
-	console.log("startNode is " + index);
-	
-	//check if up
 	if (row > 0) {
-		let index1 = index - width;
-		neighbors.push(nodeArr[index1 - 1]);
-		//console.log("up index is " + index1);
+		let index1 = ((row - 1) * width) + col;
+		neighbors.push(nodeArr[index1]);
 	}
 	//check if down
 	if (row < grid.length - 1) {
-		let index2 = index + width;
-		neighbors.push(nodeArr[index2 - 1]);
-		//console.log("down index is " + index2);
-	}
-	//check if right
-	if (col > 0) {
-		let index3 = index + 1;
-		neighbors.push(nodeArr[index3 - 1]);
-		//console.log("right index is " + index3);
+		let index2 = ((row + 1) * width) + col;
+		neighbors.push(nodeArr[index2]);
 	}
 	//check if left
-	if (col < grid[0].length - 1) {
-		let index4 = index - 1;
-		neighbors.push(nodeArr[index4 - 1]);
-		//console.log("left index is " + index4);
+	if (col > 0) {
+		let index3 = (row * width) + (col - 1);
+		neighbors.push(nodeArr[index3]);
 	}
-
-	// returns new array that filters out visited neighbors
-	//for every neighbor in the array, check if isVisited is false, and if it is, then filter it out
-	
-    return neighbors.filter(neighbor => !neighbor.isVisited); //this is causing the error 
-	//at some point i end up pushing a null object to the function
+	//check if right
+	if (col < grid[0].length - 1) {
+		let index4 = (row * width) + (col + 1);
+		neighbors.push(nodeArr[index4]);
+	}
+    return neighbors.filter(neighbor => !neighbor.isVisited);
 }
 
 //takes grid of nodes and returns 1D array of nodes

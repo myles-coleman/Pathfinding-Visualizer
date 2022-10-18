@@ -76,7 +76,6 @@ const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
 		setTimeout(() => {
 			const node = visitedNodesInOrder[i];
 			document.getElementById(`node-${node.row}-${node.col}`).classList.add('node-visited');
-			node.isVisited = true;
 		}, 10 * i);
     }
 }
@@ -98,7 +97,6 @@ const visualizeDijkstra = () => {
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
-
 }
 
 //prints grid of nodes to console
@@ -116,7 +114,7 @@ const printNeighbors = (node, grid) => {
 	}
 }
 
-//attatching method for refreshing grid to the event listener
+//attatching methods to buttons with event listeners
 document.getElementById("refresh").addEventListener("click", () => {
     document.getElementById("container").replaceChildren();
     createGrid();
