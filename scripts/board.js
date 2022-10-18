@@ -93,7 +93,6 @@ const visualizeDijkstra = () => {
 	let nodes = getNodes(grid);
 	const startNode = nodes[startIndex];
 	const finishNode = nodes[finishIndex];
-
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
@@ -119,6 +118,8 @@ const printNeighbors = (node, grid) => {
 document.getElementById("refresh").addEventListener("click", () => {
     document.getElementById("container").replaceChildren();
     createGrid();
+
+	//need to also reset all the arrays;
     console.log("grid refreshed");
 });
 

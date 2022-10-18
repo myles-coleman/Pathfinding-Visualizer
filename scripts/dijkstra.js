@@ -40,9 +40,9 @@ export const getUnvisitedNeighbors = (node, grid) => {
     const {col, row} = node;
 
 	const width = 45;
-	const index = (row * width) + col; //issue
 	const nodeArr = getNodes(grid);
 
+	//check if up
 	if (row > 0) {
 		let index1 = ((row - 1) * width) + col;
 		neighbors.push(nodeArr[index1]);
@@ -78,7 +78,6 @@ export const getNodes = (grid) => {
   
 // Starts from the finishNode and returns an array of nodes for the shortest path to the startNode.
 export const getNodesInShortestPathOrder = (finishNode) => {
-
 	const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
     while (currentNode !== null) {
