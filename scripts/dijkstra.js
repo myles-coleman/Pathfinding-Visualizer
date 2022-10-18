@@ -34,34 +34,41 @@ const updateUnvisitedNeighbors = (node, grid) => {
 }
 
 //checks adjacent nodes
-const getUnvisitedNeighbors = (node, grid) => { //need to fix this function
+export const getUnvisitedNeighbors = (node, grid) => { //every neighbor is shifted 1 to the right. (example, its counting the left neighbor as the starting node)
 
     const neighbors = [];
     const {col, row} = node;
 
 	const width = 45;
-	let index = (row * width) + col + 1;
+	let index = (row * width) + col;
 	const nodeArr = getNodes(grid);
+
+	//test case is (row 9, col 7)
+	console.log("startNode is " + index);
 	
 	//check if up
 	if (row > 0) {
-		index -= width;
-		neighbors.push(nodeArr[index]);
+		let index1 = index - width;
+		neighbors.push(nodeArr[index1]);
+		console.log("up index is " + index1);
 	}
 	//check if down
 	if (row < grid.length - 1) {
-		index += width;
-		neighbors.push(nodeArr[index]);
+		let index2 = index + width;
+		neighbors.push(nodeArr[index2]);
+		console.log("down index is " + index2);
 	}
 	//check if right
 	if (col > 0) {
-		index += 1;
-		neighbors.push(nodeArr[index]);
+		let index3 = index + 1;
+		neighbors.push(nodeArr[index3]);
+		console.log("right index is " + index3);
 	}
 	//check if left
 	if (col < grid[0].length - 1) {
-		index -= 1;
-		neighbors.push(nodeArr[index]);
+		let index4 = index - 1;
+		neighbors.push(nodeArr[index4]);
+		console.log("left index is " + index4);
 	}
 
 	// returns new array that filters out visited neighbors

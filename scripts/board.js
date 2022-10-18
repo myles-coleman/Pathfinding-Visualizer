@@ -1,4 +1,4 @@
-import {dijkstra, getNodesInShortestPathOrder, getNodes} from './dijkstra.js';
+import {dijkstra, getNodesInShortestPathOrder, getNodes, getUnvisitedNeighbors} from './dijkstra.js';
 
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
 const height = 20;
@@ -7,6 +7,8 @@ const START_NODE_ROW = 9;
 const START_NODE_COL = 7;
 const FINISH_NODE_ROW = 9;
 const FINISH_NODE_COL = 37;
+const startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
+const finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL; //possibly an issue that i had to remove (+1)
 
 const grid = [];
 const divGrid = [];
@@ -90,20 +92,27 @@ const animateShortestPath = (nodesInShortestPathOrder) => {
 
 const visualizeDijkstra = () => {
 	let nodes = getNodes(grid);
-	let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
-	let finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 	const startNode = nodes[startIndex];
 	const finishNode = nodes[finishIndex];
 
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+
 }
 
 //prints grid of nodes to console
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
+	}
+}
+
+const printNeighbors = (node, grid) => {
+	const neighbors = getUnvisitedNeighbors(node, grid);
+
+	for (let i = 0; i < neighbors.length; i++) {
+		console.log(neighbors[i]);
 	}
 }
 
@@ -116,6 +125,10 @@ document.getElementById("refresh").addEventListener("click", () => {
 
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(divGrid);
+});
+
+document.getElementById("print-extra").addEventListener("click", () => {
+	printNeighbors(getNodes(grid)[startIndex], grid);
 });
 
 document.getElementById("visualize").addEventListener("click", () => {
