@@ -1,34 +1,19 @@
 import {dijkstra, getNodesInShortestPathOrder, getNodes} from './dijkstra.js';
+import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL} from './node.js';
 
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
 const height = 20;
 const width = 45;
-const START_NODE_ROW = 9;
-const START_NODE_COL = 7;
-const FINISH_NODE_ROW = 9;
-const FINISH_NODE_COL = 37;
 const startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 const finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 const grid = [];
-
-//function to create node object
-const createNode = (col, row) => {
-	return {
-	  	col,
-	  	row,
-	  	isStart: row === START_NODE_ROW && col === START_NODE_COL,
-	  	isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
-	  	distance: Infinity,
-	  	isVisited: false,
-	  	isWall: false,
-	  	previousNode: null,
-	};
-};
+const divGrid = [];
 
 //creates grid and returns array of nodes and array of divNodes
 const createGrid = () => {
 	for (let row = 0; row < height; row++) {
-	  	const currentRow = [];
+	  	const nodeRow = [];
+		const divRow = [];
 	  	for (let col = 0; col < width; col++) {
 
 			let node = createNode(col, row);
@@ -49,16 +34,53 @@ const createGrid = () => {
                 if (!node.isStart && !node.isFinish) {
 					divNode.classList.add('node-wall');
 					node.isWall = true;
-            	}
+            	} 
 			});
-
+			
 			//inserts divs into the container, creating the grid
 			document.getElementById("container").appendChild(divNode);
-			currentRow.push(node);
+			nodeRow.push(node);
+			divRow.push(divNode);
 	  	}
-	  	grid.push(currentRow);
+	  	grid.push(nodeRow);
+		divGrid.push(divRow);
 	}
 }
+
+//adds event listener for removing walls and removes event listener for adding walls
+const addWalls = () => {
+	for (let i = 0; i < divGrid.length; i++) {
+		for (let j = 0; j < divGrid[0].length; j++) {
+			divGrid[i][j].addEventListener("dragover", () => { 
+				divGrid[i][j].classList.add('node-wall');
+				grid[i][j].isWall = true;
+			});
+			divGrid[i][j].removeEventListener("dragover", () => { 
+					divGrid[i][j].classList.remove('node-wall');
+					grid[i][j].isWall = false;
+			});
+		}
+	}
+}
+
+//adds event listener for adding walls and removes event listener for removing walls
+const eraseWalls = () => {
+	for (let i = 0; i < divGrid.length; i++) {
+		for (let j = 0; j < divGrid[0].length; j++) {
+			divGrid[i][j].addEventListener("dragover", () => {
+					divGrid[i][j].classList.remove('node-wall');
+					grid[i][j].isWall = false;
+			});
+			divGrid[i][j].removeEventListener("dragover", () => { 
+				divGrid[i][j].classList.add('node-wall');
+				grid[i][j].isWall = true;
+		});
+		}
+	}
+}
+
+//function for setting start node
+//function for setting finish node
 
 const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
@@ -75,7 +97,7 @@ const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     }
 }
 
-//draws the shortest path after the finishNode is reached
+// draws the shortest path after the finishNode is reached
 const animateShortestPath = (nodesInShortestPathOrder) => {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
 		setTimeout(() => {
@@ -85,6 +107,7 @@ const animateShortestPath = (nodesInShortestPathOrder) => {
     }
 }
 
+// function to actually visualize dijkstras
 const visualizeDijkstra = () => {
 	let nodes = getNodes(grid);
 	const startNode = nodes[startIndex];
@@ -119,6 +142,16 @@ document.getElementById("refresh").addEventListener("click", () => {
 	//need to also reset all the arrays somehow;
     console.log("grid refreshed");
 });
+
+document.getElementById("add").addEventListener("click", () => {
+	addWalls();
+});
+
+document.getElementById("eraser").addEventListener("click", () => {
+	eraseWalls();
+});
+
+
 
 /* functions for testing nodes
 
