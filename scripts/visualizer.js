@@ -6,8 +6,8 @@ const height = 20;
 const width = 45;
 const startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 const finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
-const grid = [];
-const divGrid = [];
+let grid = [];
+let divGrid = [];
 
 //creates grid and returns array of nodes and array of divNodes
 const createGrid = () => {
@@ -117,57 +117,38 @@ const visualizeDijkstra = () => {
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
 
-/* functions for testing nodes
-
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
 	}
 }
 
-const printNeighbors = (node, grid) => {
-	const neighbors = getUnvisitedNeighbors(node, grid);
-
-	for (let i = 0; i < neighbors.length; i++) {
-		console.log(neighbors[i]);
-	}
-}
-*/
-
 //attatching methods to buttons with event listeners
 document.getElementById("refresh").addEventListener("click", () => {
     document.getElementById("container").replaceChildren();
+	divGrid = [];
+	grid = [];
     createGrid();
-
-	//need to also reset all the arrays somehow;
     console.log("grid refreshed");
 });
 
 document.getElementById("add").addEventListener("click", () => {
 	addWalls();
+	console.log("walls mode");
 });
 
 document.getElementById("eraser").addEventListener("click", () => {
 	eraseWalls();
+	console.log("eraser mode");
 });
-
-
-
-/* functions for testing nodes
-
-document.getElementById("print").addEventListener("click", () => {
-  	printNodes(divGrid);
-});
-
-document.getElementById("print-extra").addEventListener("click", () => {
-	printNeighbors(getNodes(grid)[startIndex], grid);
-});
-
-*/
 
 document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
 	console.log("started visualization");
+});
+
+document.getElementById("print").addEventListener("click", () => {
+  	printNodes(divGrid);
 });
 
 window.onload = createGrid;
