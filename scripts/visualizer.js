@@ -1,4 +1,4 @@
-import {dijkstra, getNodesInShortestPathOrder, getNodes} from './dijkstra.js';
+import {dijkstra, getNodesInShortestPathOrder, getNodes} from './algorithms/dijkstra.js';
 import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL} from './node.js';
 
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
@@ -8,6 +8,8 @@ const startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 const finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 let grid = [];
 let divGrid = [];
+let startNode;
+let finishNode;
 
 //creates grid and returns array of nodes and array of divNodes
 const createGrid = () => {
@@ -18,22 +20,24 @@ const createGrid = () => {
 
 			let node = createNode(col, row);
 			let divNode = document.createElement('div');
-
 			divNode.className = "node";
 			divNode.setAttribute('id',`node-${row}-${col}`);
-			
+			divNode.draggable = true;
+
 			if (node.isStart) {
 				divNode.classList.add('node-start');
+				startNode = divNode;
 			} else if (node.isFinish) {
 				divNode.classList.add('node-finish');
+				finishNode = divNode;
 			}
 			
 			//add wall class to the nodes that are dragged over with left click
-            divNode.draggable = true;
             divNode.addEventListener("dragover", () => { 
                 if (!node.isStart && !node.isFinish) {
 					divNode.classList.add('node-wall');
 					node.isWall = true;
+					event.preventDefault();
             	} 
 			});
 			
@@ -45,6 +49,26 @@ const createGrid = () => {
 	  	grid.push(nodeRow);
 		divGrid.push(divRow);
 	}
+
+	startNode.addEventListener("dragstart" ,() => {
+		eraseWalls();
+	})
+
+	
+	startNode.addEventListener("drop" ,() => {
+
+		event.preventDefault();
+		newStartDivNode = EventTarget;
+	
+		if (newStartDivNode.className = "node") {
+			startNode.classList.remove("node-start");
+			//in order to change startNode, need to change startIndex
+
+			newStartDivNode.classList.add("node-start");
+			console.log("dropped");
+
+		}
+	})
 }
 
 //adds event listener for removing walls and removes event listener for adding walls
@@ -56,8 +80,8 @@ const addWalls = () => {
 				grid[i][j].isWall = true;
 			});
 			divGrid[i][j].removeEventListener("dragover", () => { 
-					divGrid[i][j].classList.remove('node-wall');
-					grid[i][j].isWall = false;
+				divGrid[i][j].classList.remove('node-wall');
+				grid[i][j].isWall = false;
 			});
 		}
 	}
@@ -68,8 +92,8 @@ const eraseWalls = () => {
 	for (let i = 0; i < divGrid.length; i++) {
 		for (let j = 0; j < divGrid[0].length; j++) {
 			divGrid[i][j].addEventListener("dragover", () => {
-					divGrid[i][j].classList.remove('node-wall');
-					grid[i][j].isWall = false;
+				divGrid[i][j].classList.remove('node-wall');
+				grid[i][j].isWall = false;
 			});
 			divGrid[i][j].removeEventListener("dragover", () => { 
 				divGrid[i][j].classList.add('node-wall');
@@ -79,8 +103,7 @@ const eraseWalls = () => {
 	}
 }
 
-//function for setting start node
-//function for setting finish node
+
 
 const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
