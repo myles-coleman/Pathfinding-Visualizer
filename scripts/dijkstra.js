@@ -4,15 +4,14 @@
 // by backtracking from the finish node.
 export const dijkstra = (grid, startNode, finishNode) => {
 	const visitedNodesInOrder = [];
-    startNode.distance = 0;
     const unvisitedNodes = getNodes(grid);
+	startNode.distance = 0;
+
     while (!!unvisitedNodes.length) {
 		sortNodesByDistance(unvisitedNodes);
 		const closestNode = unvisitedNodes.shift();
-		// If we encounter a wall, we skip it.
-		if (closestNode.isWall) continue;
-		// If the closest node is at a distance of infinity,
-		// we must be trapped and should therefore stop.
+		if (closestNode.isWall) continue; // If closestNode is a wall, we skip it and continue
+		// If the closestNode is at a distance of infinity, we are trapped so we return
 		if (closestNode.distance === Infinity) return visitedNodesInOrder;
 		closestNode.isVisited = true;
 		visitedNodesInOrder.push(closestNode);
@@ -25,6 +24,7 @@ const sortNodesByDistance = (unvisitedNodes) => {
   	unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 }
   
+// sets the distance and previous node for all the adjacent nodes
 const updateUnvisitedNeighbors = (node, grid) => {
 	const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
     for (const neighbor of unvisitedNeighbors) {
@@ -33,31 +33,30 @@ const updateUnvisitedNeighbors = (node, grid) => {
     }
 }
 
-//checks adjacent nodes
-export const getUnvisitedNeighbors = (node, grid) => {
+// checks adjacent nodes and pushes them to an array if they haven't already been visisted
+const getUnvisitedNeighbors = (node, grid) => {
 
     const neighbors = [];
     const {col, row} = node;
-
 	const width = 45;
 	const nodeArr = getNodes(grid);
 
-	//check if up
+	// check if up
 	if (row > 0) {
 		let index1 = ((row - 1) * width) + col;
 		neighbors.push(nodeArr[index1]);
 	}
-	//check if down
+	// check if down
 	if (row < grid.length - 1) {
 		let index2 = ((row + 1) * width) + col;
 		neighbors.push(nodeArr[index2]);
 	}
-	//check if left
+	// check if left
 	if (col > 0) {
 		let index3 = (row * width) + (col - 1);
 		neighbors.push(nodeArr[index3]);
 	}
-	//check if right
+	// check if right
 	if (col < grid[0].length - 1) {
 		let index4 = (row * width) + (col + 1);
 		neighbors.push(nodeArr[index4]);
@@ -65,7 +64,7 @@ export const getUnvisitedNeighbors = (node, grid) => {
     return neighbors.filter(neighbor => !neighbor.isVisited);
 }
 
-//takes grid of nodes and returns 1D array of nodes
+// takes grid of nodes and returns 1D array of nodes
 export const getNodes = (grid) => {
 	const nodes = []
 	for (let i = 0; i < grid.length; i++) {

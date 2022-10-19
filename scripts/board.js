@@ -1,4 +1,4 @@
-import {dijkstra, getNodesInShortestPathOrder, getNodes, getUnvisitedNeighbors} from './dijkstra.js';
+import {dijkstra, getNodesInShortestPathOrder, getNodes} from './dijkstra.js';
 
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
 const height = 20;
@@ -8,10 +8,8 @@ const START_NODE_COL = 7;
 const FINISH_NODE_ROW = 9;
 const FINISH_NODE_COL = 37;
 const startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
-const finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL; //possibly an issue that i had to remove (+1)
-
+const finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 const grid = [];
-const divGrid = [];
 
 //function to create node object
 const createNode = (col, row) => {
@@ -31,7 +29,6 @@ const createNode = (col, row) => {
 const createGrid = () => {
 	for (let row = 0; row < height; row++) {
 	  	const currentRow = [];
-		const currentRow2 = [];
 	  	for (let col = 0; col < width; col++) {
 
 			let node = createNode(col, row);
@@ -55,13 +52,11 @@ const createGrid = () => {
             	}
 			});
 
-			//append divNodes to container and push nodes and divNodes to their respective arrays 
+			//inserts divs into the container, creating the grid
 			document.getElementById("container").appendChild(divNode);
 			currentRow.push(node);
-			currentRow2.push(divNode);
 	  	}
 	  	grid.push(currentRow);
-		divGrid.push(currentRow2);
 	}
 }
 
@@ -80,6 +75,7 @@ const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     }
 }
 
+//draws the shortest path after the finishNode is reached
 const animateShortestPath = (nodesInShortestPathOrder) => {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
 		setTimeout(() => {
@@ -98,7 +94,8 @@ const visualizeDijkstra = () => {
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
 
-/*
+/* functions for testing nodes
+
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
@@ -119,11 +116,11 @@ document.getElementById("refresh").addEventListener("click", () => {
     document.getElementById("container").replaceChildren();
     createGrid();
 
-	//need to also reset all the arrays;
+	//need to also reset all the arrays somehow;
     console.log("grid refreshed");
 });
 
-/*
+/* functions for testing nodes
 
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(divGrid);
