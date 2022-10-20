@@ -4,7 +4,7 @@ import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
 const height = 20;
 const width = 45;
-let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
+let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1; //we change this later in the drop event listener
 let finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 let grid = [];
 let divGrid = [];
@@ -69,8 +69,6 @@ const createGrid = () => {
 					addWalls();
 				}
 			})
-
-			//maybe make it so addWalls() is turned back on after dropping newStartNode
 			
 			//inserts divs into the container, creating the grid
 			document.getElementById("container").appendChild(divNode);
