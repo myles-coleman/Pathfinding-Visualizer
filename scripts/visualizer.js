@@ -118,7 +118,7 @@ const eraseWalls = () => {
 			divGrid[i][j].removeEventListener("dragover", () => { 
 				divGrid[i][j].classList.add('node-wall');
 				grid[i][j].isWall = true;
-		});
+			});
 		}
 	}
 }
@@ -187,9 +187,9 @@ document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
 	console.log("started visualization");
 });
-
+/*
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(divGrid);
 });
-
+*/
 window.onload = createGrid;
