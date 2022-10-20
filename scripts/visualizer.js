@@ -12,7 +12,7 @@ let startNode;
 let finishNode;
 let startDivNode;
 let finishDivNode;
-let dragstart;
+let dragStart;
 
 //creates grid and returns array of nodes and array of divNodes
 const createGrid = () => {
@@ -47,15 +47,15 @@ const createGrid = () => {
 			});
 			//when picking up the startNode, turn on the eraseWalls() method
 			divNode.addEventListener("dragstart" ,() => {
-				if (node.isStart) {
+				if (node.isStart || node.isFinish) {
 					eraseWalls();
 				}
-				dragstart = divNode;
+				dragStart = divNode;
 			})
-			//when dropping the startNode, make the drop target the new startNode
+			//when dropping the startNode/finishNode, make the drop target the new startNode/finishNode
 			divNode.addEventListener("drop" ,(event) => {
 				event.preventDefault();
-				if (dragstart === startDivNode) {
+				if (dragStart === startDivNode) {
 					startDivNode.classList.remove("node-start");
 					divNode.classList.add("node-start");
 					if (divNode.classList.contains("node-wall")) {
@@ -67,9 +67,20 @@ const createGrid = () => {
 					startNode = node;
 					startIndex = (startNode.row * width) + startNode.col + 1;
 					addWalls();
+				} else if (dragStart === finishDivNode) {
+					finishDivNode.classList.remove("node-finish");
+					divNode.classList.add("node-finish");
+					if (divNode.classList.contains("node-wall")) {
+						divNode.classList.remove("node-wall");
+					}
+					finishNode.isFinish = false;
+					node.isFinish = true;
+					finishDivNode = divNode;
+					finishNode = node;
+					finishIndex = (finishNode.row * width) + finishNode.col;
+					addWalls();
 				}
 			})
-			
 			//inserts divs into the container, creating the grid
 			document.getElementById("container").appendChild(divNode);
 			nodeRow.push(node);
