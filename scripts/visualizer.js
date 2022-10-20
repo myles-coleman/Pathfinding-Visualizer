@@ -4,12 +4,15 @@ import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
 const height = 20;
 const width = 45;
-const startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
-const finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
+let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
+let finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 let grid = [];
 let divGrid = [];
 let startNode;
 let finishNode;
+let startDivNode;
+let finishDivNode;
+let dragstart;
 
 //creates grid and returns array of nodes and array of divNodes
 const createGrid = () => {
@@ -26,20 +29,45 @@ const createGrid = () => {
 
 			if (node.isStart) {
 				divNode.classList.add('node-start');
-				startNode = divNode;
+				startDivNode = divNode;
+				startNode = node;
 			} else if (node.isFinish) {
 				divNode.classList.add('node-finish');
-				finishNode = divNode;
+				finishDivNode = divNode;
+				finishNode = node;
 			}
 			
 			//add wall class to the nodes that are dragged over with left click
-            divNode.addEventListener("dragover", () => { 
+            divNode.addEventListener("dragover", (event) => { 
+				event.preventDefault();
                 if (!node.isStart && !node.isFinish) {
 					divNode.classList.add('node-wall');
 					node.isWall = true;
-					event.preventDefault();
             	} 
 			});
+
+			divNode.addEventListener("dragstart" ,() => {
+				if (node.isStart) {
+					eraseWalls();
+				}
+				dragstart = divNode;
+			})
+
+			divNode.addEventListener("drop" ,(event) => {
+				event.preventDefault();
+				if (dragstart === startDivNode) {
+					startDivNode.classList.remove("node-start");
+					divNode.classList.add("node-start");
+					if (divNode.classList.contains("node-wall")) {
+						divNode.classList.remove("node-wall");
+					}
+					startNode.isStart = false;
+					node.isStart = true;
+					startDivNode = divNode;
+					startNode = node;
+					startIndex = (startNode.row * width) + startNode.col + 1;
+				}
+			})
 			
 			//inserts divs into the container, creating the grid
 			document.getElementById("container").appendChild(divNode);
@@ -49,26 +77,6 @@ const createGrid = () => {
 	  	grid.push(nodeRow);
 		divGrid.push(divRow);
 	}
-
-	startNode.addEventListener("dragstart" ,() => {
-		eraseWalls();
-	})
-
-	
-	startNode.addEventListener("drop" ,() => {
-
-		event.preventDefault();
-		newStartDivNode = EventTarget;
-	
-		if (newStartDivNode.className = "node") {
-			startNode.classList.remove("node-start");
-			//in order to change startNode, need to change startIndex
-
-			newStartDivNode.classList.add("node-start");
-			console.log("dropped");
-
-		}
-	})
 }
 
 //adds event listener for removing walls and removes event listener for adding walls
@@ -102,8 +110,6 @@ const eraseWalls = () => {
 		}
 	}
 }
-
-
 
 const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
