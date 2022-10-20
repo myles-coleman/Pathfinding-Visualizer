@@ -45,14 +45,14 @@ const createGrid = () => {
 					node.isWall = true;
             	} 
 			});
-
+			//when picking up the startNode, turn on the eraseWalls() method
 			divNode.addEventListener("dragstart" ,() => {
 				if (node.isStart) {
 					eraseWalls();
 				}
 				dragstart = divNode;
 			})
-
+			//when dropping the startNode, make the drop target the new startNode
 			divNode.addEventListener("drop" ,(event) => {
 				event.preventDefault();
 				if (dragstart === startDivNode) {
