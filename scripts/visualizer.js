@@ -66,8 +66,11 @@ const createGrid = () => {
 					startDivNode = divNode;
 					startNode = node;
 					startIndex = (startNode.row * width) + startNode.col + 1;
+					addWalls();
 				}
 			})
+
+			//maybe make it so addWalls() is turned back on after dropping newStartNode
 			
 			//inserts divs into the container, creating the grid
 			document.getElementById("container").appendChild(divNode);
