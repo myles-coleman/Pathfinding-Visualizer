@@ -36,7 +36,6 @@ const createGrid = () => {
 				finishDivNode = divNode;
 				finishNode = node;
 			}
-			
 			//add wall class to the nodes that are dragged over with left click
             divNode.addEventListener("dragover", (event) => { 
 				event.preventDefault();
@@ -164,16 +163,18 @@ const printNodes = (grid) => {
 	}
 }
 
-//attatching methods to buttons with event listeners
-document.getElementById("refresh").addEventListener("click", () => {
-    document.getElementById("container").replaceChildren();
+const refreshGrid = () => {
+	document.getElementById("container").replaceChildren();
 	divGrid = [];
 	grid = [];
     createGrid();
 	startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 	finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
     console.log("grid refreshed");
-});
+}
+
+//attatching methods to buttons with event listeners
+document.getElementById("refresh").addEventListener("click", refreshGrid);
 
 document.getElementById("add").addEventListener("click", () => {
 	addWalls();
@@ -189,9 +190,9 @@ document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
 	console.log("started visualization");
 });
-
+/*
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(divGrid);
 });
-
+*/
 window.onload = createGrid;
