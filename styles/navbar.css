@@ -26,11 +26,11 @@ body::webkit-scrollbar-track {
 main {
     margin-left: 5rem;
     padding: 1rem
-
 }
 
 .navbar {
     position: fixed;
+    z-index: 1;
     background-color: var(--bg-primary);
     transition: width 200ms ease;
 }
