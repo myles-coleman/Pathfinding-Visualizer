@@ -92,8 +92,11 @@
     }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1080px) {
 
-	
+	#container {
 
+		height: 800;
+		width: 1800;
+	}
 }
