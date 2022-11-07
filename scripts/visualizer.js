@@ -4,7 +4,7 @@ import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
 const height = 20;
 const width = 45;
-let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1; //we change this later in the drop event listener
+let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 let finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 let grid = [];
 let divGrid = [];
@@ -156,13 +156,13 @@ const visualizeDijkstra = () => {
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
-
+/*
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
 	}
 }
-
+*/
 const refreshGrid = () => {
 	document.getElementById("container").replaceChildren();
 	divGrid = [];
@@ -176,9 +176,9 @@ const refreshGrid = () => {
 //attatching methods to buttons with event listeners
 document.getElementById("refresh").addEventListener("click", refreshGrid);
 
-document.getElementById("add").addEventListener("click", () => {
+document.getElementById("draw").addEventListener("click", () => {
 	addWalls();
-	console.log("walls mode");
+	console.log("drawing mode");
 });
 
 document.getElementById("eraser").addEventListener("click", () => {
