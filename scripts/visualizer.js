@@ -130,13 +130,13 @@ const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
 		if (i === visitedNodesInOrder.length) {
 			setTimeout(() => {
 				animateShortestPath(nodesInShortestPathOrder);
-			}, 10 * i);
+			}, 5 * i);
 			return;
 		}
 		setTimeout(() => {
 			const node = visitedNodesInOrder[i];
 			document.getElementById(`node-${node.row}-${node.col}`).classList.add('node-visited');
-		}, 10 * i);
+		}, 5 * i);
     }
 }
 
@@ -146,7 +146,7 @@ const animateShortestPath = (nodesInShortestPathOrder) => {
 		setTimeout(() => {
 			const node = nodesInShortestPathOrder[i];
 			document.getElementById(`node-${node.row}-${node.col}`).classList.add('node-shortest-path');
-		}, 50 * i);
+		}, 30 * i);
     }
 }
 
@@ -159,13 +159,13 @@ const visualizeDijkstra = () => {
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
-
+/*
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
 	}
 }
-
+*/
 const refreshGrid = () => {
 	document.getElementById("container").replaceChildren();
 	divGrid = [];
@@ -193,9 +193,9 @@ document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
 	console.log("started visualization");
 });
-
+/*
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(grid);
 });
-
+*/
 window.onload = createGrid;
