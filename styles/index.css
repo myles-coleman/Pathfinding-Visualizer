@@ -1,7 +1,7 @@
 #container {
     position: relative;
-    top: 55px;
-    left: 40px;
+    top: 54px;
+    left: 37px;
     outline:2px solid rgba(0, 202, 91, 0.75);
     font-size: 1;
 	height:1150px;
@@ -40,6 +40,26 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-play-state: running;
+}
+
+#tutorial {
+	z-index: 2;
+	position: absolute;
+	height: 40%;
+	width: 20%;
+	float: right;
+	background-color: rgb(255, 255, 255);
+	border-radius: 3%;
+	border: 2px solid #424242;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
 }
   
 @keyframes visitedAnimation {

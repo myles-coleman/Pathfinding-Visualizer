@@ -124,6 +124,39 @@ const eraseWalls = () => {
 		}
 	}
 }
+/*
+const printNodes = (grid) => {
+	for (let i = 0; i < grid.length; i++) {
+		console.log(grid[i]);
+	}
+}
+*/
+const refreshGrid = () => {
+	document.getElementById("container").replaceChildren();
+	divGrid = [];
+	grid = [];
+    createGrid();
+	startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
+	finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
+    console.log("grid refreshed");
+}
+
+const startTutorial = () => {
+
+	let page1 = document.createElement("div");
+	let page2 = document.createElement("div");
+	page1.setAttribute('id',"tutorial");
+	page2.setAttribute('id',"tutorial");
+
+	//create html elements to fill in the tutorial
+	//page1: explain what a pathfinding algorithm is
+	//page2: explain how to add/erase walls and move start and finish nodes.
+	//add a "next" button on the first page (on the right)
+	//add a "back" button (on the left) and a "finish button" (on the right) on the second page
+	//make sure that it works for both available screen sizes
+
+	document.body.appendChild(page1);
+}
 
 const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
@@ -159,22 +192,6 @@ const visualizeDijkstra = () => {
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
-/*
-const printNodes = (grid) => {
-	for (let i = 0; i < grid.length; i++) {
-		console.log(grid[i]);
-	}
-}
-*/
-const refreshGrid = () => {
-	document.getElementById("container").replaceChildren();
-	divGrid = [];
-	grid = [];
-    createGrid();
-	startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
-	finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
-    console.log("grid refreshed");
-}
 
 //attatching methods to buttons with event listeners
 document.getElementById("refresh").addEventListener("click", refreshGrid);
@@ -192,6 +209,10 @@ document.getElementById("eraser").addEventListener("click", () => {
 document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
 	console.log("started visualization");
+});
+
+document.getElementById("tutorial-btn").addEventListener("click", () => {
+	startTutorial();
 });
 /*
 document.getElementById("print").addEventListener("click", () => {
