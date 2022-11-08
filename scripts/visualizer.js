@@ -188,7 +188,7 @@ const startTutorial = () => {
 		document.body.replaceChild(page1, page2);
 	})
 	
-
+	//make a page 3 linking to github
 
 	page1.appendChild(title);
 	page1.appendChild(text);
