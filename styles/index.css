@@ -4,9 +4,9 @@
     left: 40px;
     outline:2px solid rgba(0, 202, 91, 0.75);
     font-size: 1;
+	height:1150px;
+	width:2300px;
     margin:auto;
-    height:1150px;
-    width:2300px;
     padding: 0;
     border: none;
 }
@@ -92,11 +92,11 @@
     }
 }
 
-@media only screen and (min-width: 1080px) {
+@media only screen and (max-height: 1080px) {
 
 	#container {
 
-		height: 800;
-		width: 1800;
+		height: 800px;
+		width: 1800px;
 	}
 }
