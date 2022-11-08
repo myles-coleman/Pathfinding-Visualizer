@@ -3,7 +3,7 @@
     font-family: 'Noto Sans Display', sans-serif;
     --text-primary: #000000;
     --text-secondary: #ececec;
-    --bg-primary: rgba(82, 160, 93, 0.75);
+    --bg-primary: #64d697;
     --bg-secondary: #424242;
     --transition-speed: 500ms;
 }
