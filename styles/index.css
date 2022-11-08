@@ -5,15 +5,15 @@
     outline:2px solid rgba(0, 202, 91, 0.75);
     font-size: 1;
     margin:auto;
-    height:800px;
-    width:1800px;
+    height:1150px;
+    width:2300px;
     padding: 0;
     border: none;
 }
 
 .node {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     outline: 1px solid rgba(0, 202, 91, 0.75);
     display: inline-block;
     vertical-align: top;
@@ -92,8 +92,11 @@
     }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1080px) {
 
-	
+	#container {
 
+		height: 800;
+		width: 1800;
+	}
 }

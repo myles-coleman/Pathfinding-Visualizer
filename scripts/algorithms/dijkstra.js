@@ -38,7 +38,8 @@ const getUnvisitedNeighbors = (node, grid) => {
 
     const neighbors = [];
     const {col, row} = node;
-	const width = 45;
+	let width; //this value needs to be changed based on the width defined in visualizer.js
+	screen.height === 1440 ? width = 92 : width = 72;
 	const nodeArr = getNodes(grid);
 
 	// check if up

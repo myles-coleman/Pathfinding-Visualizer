@@ -2,8 +2,11 @@ import {dijkstra, getNodesInShortestPathOrder, getNodes} from './algorithms/dijk
 import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL} from './node.js';
 
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
-const height = 40;
-const width = 90;
+let height;
+let width;
+screen.height === 1440 ? height = 46 : width = 32;
+screen.height === 1440 ? width = 92 :  width = 72;
+
 let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 let finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
 let grid = [];
@@ -192,7 +195,7 @@ document.getElementById("visualize").addEventListener("click", () => {
 });
 /*
 document.getElementById("print").addEventListener("click", () => {
-  	printNodes(divGrid);
+  	printNodes(grid);
 });
 */
 window.onload = createGrid;
