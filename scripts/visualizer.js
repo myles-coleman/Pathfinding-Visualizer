@@ -143,10 +143,20 @@ const refreshGrid = () => {
 
 const startTutorial = () => {
 
+	//create a div element and giv the element an id of 'tutorial'
 	let page1 = document.createElement("div");
-	let page2 = document.createElement("div");
 	page1.setAttribute('id',"tutorial");
-	page2.setAttribute('id',"tutorial");
+
+	let title = document.createElement("h1");
+	title.innerHTML += "Pathfinding Visualizer Tutorial";
+
+	let text = document.createElement("p");
+	text.setAttribute('id', "tutorial-text");
+	text.innerHTML += "This webapp uses Dijkstra's algorithm, a pathfinding algorithm, to calculate the shortest path between two nodes."
+
+	const image = "<img id='tutorial-img' src='../images/dijkstras.png' alt='dijkstras' >";
+	page1.innerHTML += image;
+
 
 	//create html elements to fill in the tutorial
 	//page1: explain what a pathfinding algorithm is
@@ -154,7 +164,8 @@ const startTutorial = () => {
 	//add a "next" button on the first page (on the right)
 	//add a "back" button (on the left) and a "finish button" (on the right) on the second page
 	//make sure that it works for both available screen sizes
-
+	page1.appendChild(title);
+	page1.appendChild(text);
 	document.body.appendChild(page1);
 }
 
