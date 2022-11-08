@@ -143,29 +143,40 @@ const refreshGrid = () => {
 
 const startTutorial = () => {
 
-	//create a div element and giv the element an id of 'tutorial'
 	let page1 = document.createElement("div");
-	page1.setAttribute('id',"tutorial");
-
 	let title = document.createElement("h1");
-	title.innerHTML += "Pathfinding Visualizer Tutorial";
-
 	let text = document.createElement("p");
-	text.setAttribute('id', "tutorial-text");
-	text.innerHTML += "This webapp uses Dijkstra's algorithm, a pathfinding algorithm, to calculate the shortest path between two nodes."
-
 	const image = "<img id='tutorial-img' src='../images/dijkstras.png' alt='dijkstras' >";
-	page1.innerHTML += image;
+	let backBtn = document.createElement("button");
+	let nextBtn = document.createElement("button");
+
+	page1.setAttribute('id',"tutorial");
+	text.setAttribute('id', "tutorial-text");
+	backBtn.setAttribute('id', "tutorial-btn-back");
+	nextBtn.setAttribute('id', "tutorial-btn-next");
+	backBtn.setAttribute('type', "button");
+	nextBtn.setAttribute('type', "button");
+
+	text.innerHTML += "This webapp uses Dijkstra's algorithm, a pathfinding algorithm, to calculate the shortest path between two nodes.";
+	title.innerHTML += "Pathfinding Visualizer Tutorial";
+	nextBtn.innerHTML += "next";
+	backBtn.innerHTML += "back";
+
+	//add hover for the buttons and make the color green
 
 
-	//create html elements to fill in the tutorial
-	//page1: explain what a pathfinding algorithm is
 	//page2: explain how to add/erase walls and move start and finish nodes.
 	//add a "next" button on the first page (on the right)
 	//add a "back" button (on the left) and a "finish button" (on the right) on the second page
 	//make sure that it works for both available screen sizes
+
 	page1.appendChild(title);
 	page1.appendChild(text);
+	page1.innerHTML += image;
+	page1.appendChild(backBtn);
+	page1.appendChild(nextBtn);
+	
+
 	document.body.appendChild(page1);
 }
 
@@ -222,7 +233,7 @@ document.getElementById("visualize").addEventListener("click", () => {
 	console.log("started visualization");
 });
 
-document.getElementById("tutorial-btn").addEventListener("click", () => {
+document.getElementById("start-tutorial").addEventListener("click", () => {
 	startTutorial();
 });
 /*

@@ -48,7 +48,7 @@
 	height: 60%;
 	width: 40%;
 	float: right;
-	background-color: rgb(255, 255, 255);
+	background-color: #e6e6e6;
 	border-radius: 5px;
 	border: 2px solid #424242;
 	text-align: center;
@@ -68,8 +68,24 @@
 }
 
 #tutorial-img {
+	height: 45%;
+	width: auto;
+	float: right;
+}
 
-  size: 50%;
+#tutorial-btn-next {
+	border: 0px;
+	border-radius: 4px;
+	background-color: rgba(164, 84, 255, 0.75);
+	float: right;
+
+}
+
+#tutorial-btn-back {
+	border: 0px;
+	border-radius: 4px;
+	background-color: rgba(164, 84, 255, 0.75);
+	float: left;
 }
   
 @keyframes visitedAnimation {
