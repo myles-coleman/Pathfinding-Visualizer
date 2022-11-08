@@ -4,7 +4,7 @@ import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE
 //when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
 let height;
 let width;
-screen.height === 1440 ? height = 46 : width = 32;
+screen.height === 1440 ? height = 46 : height = 32;
 screen.height === 1440 ? width = 92 :  width = 72;
 
 let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
@@ -159,13 +159,13 @@ const visualizeDijkstra = () => {
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
-/*
+
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
 	}
 }
-*/
+
 const refreshGrid = () => {
 	document.getElementById("container").replaceChildren();
 	divGrid = [];
@@ -193,9 +193,9 @@ document.getElementById("visualize").addEventListener("click", () => {
 	visualizeDijkstra();
 	console.log("started visualization");
 });
-/*
+
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(grid);
 });
-*/
+
 window.onload = createGrid;
