@@ -144,38 +144,62 @@ const refreshGrid = () => {
 const startTutorial = () => {
 
 	let page1 = document.createElement("div");
+	let page2 = document.createElement("div");
 	let title = document.createElement("h1");
 	let text = document.createElement("p");
+	let title2 = document.createElement("h1");
+	let text2 = document.createElement("p");
+	let text3 = document.createElement("p");
+
 	const image = "<img id='tutorial-img' src='../images/dijkstras.png' alt='dijkstras' >";
+	const image2 = "<img id='tutorial-img2' src='../images/walls.png' alt='wall buttons' >";
 	let backBtn = document.createElement("button");
 	let nextBtn = document.createElement("button");
 
 	page1.setAttribute('id',"tutorial");
+	title.setAttribute('id', "tutorial-title");
 	text.setAttribute('id', "tutorial-text");
+
+	page2.setAttribute('id',"tutorial");
+	title2.setAttribute('id', "tutorial-title");
+	text2.setAttribute('id', "tutorial-text");
+	text3.setAttribute('id', "tutorial-text");
+
 	backBtn.setAttribute('id', "tutorial-btn-back");
 	nextBtn.setAttribute('id', "tutorial-btn-next");
 	backBtn.setAttribute('type', "button");
 	nextBtn.setAttribute('type', "button");
 
-	text.innerHTML += "This webapp uses Dijkstra's algorithm, a pathfinding algorithm, to calculate the shortest path between two nodes.";
 	title.innerHTML += "Pathfinding Visualizer Tutorial";
+	text.innerHTML += "This webapp uses Dijkstra's algorithm, a pathfinding algorithm, to calculate the shortest path between two nodes.";
+	
+	title2.innerHTML += "Understanding Walls and Nodes";
+	text2.innerHTML += "By default, holding down left click over the grid draws walls. Clicking the 'Erase Walls' button changes the functionality of holding down left click over the grid to then erase the walls. In order to go back to drawing walls, you will need to click the 'Draw Walls' button."
+	text3.innerHTML += "You can move both the starting node and the finish node anywhere on the grid.";
+
 	nextBtn.innerHTML += "next";
 	backBtn.innerHTML += "back";
 
-	//add hover for the buttons and make the color green
+	nextBtn.addEventListener("click", () => {
+		document.body.replaceChild(page2, page1);
+	})
 
+	backBtn.addEventListener("click", () => {
+		document.body.replaceChild(page1, page2);
+	})
+	
 
-	//page2: explain how to add/erase walls and move start and finish nodes.
-	//add a "next" button on the first page (on the right)
-	//add a "back" button (on the left) and a "finish button" (on the right) on the second page
-	//make sure that it works for both available screen sizes
 
 	page1.appendChild(title);
 	page1.appendChild(text);
 	page1.innerHTML += image;
-	page1.appendChild(backBtn);
 	page1.appendChild(nextBtn);
-	
+
+	page2.appendChild(title2);
+	page2.appendChild(text2);
+	page2.innerHTML += image2;
+	page2.appendChild(text3);
+	page2.appendChild(backBtn);	
 
 	document.body.appendChild(page1);
 }

@@ -62,30 +62,57 @@
 	right: 0;
 }
 
+#tutorial-title {
+	color: #3e3e3e;
+}
+
 #tutorial-text {
 	font-size: 24px;
 	padding: 20px;
+	color: #3e3e3e;
 }
 
 #tutorial-img {
-	height: 45%;
-	width: auto;
+	height: auto;
+	width: 95%;
 	float: right;
+}
+
+#tutorial-img2 {
+	height: auto;
+	width: 25%;
+	position: absolute;
+	left: 5%;
 }
 
 #tutorial-btn-next {
-	border: 0px;
-	border-radius: 4px;
-	background-color: rgba(164, 84, 255, 0.75);
-	float: right;
-
+	position: absolute;
+	right: 2%;
+	bottom: 2%;
+	padding: 10px 15px;
+	font-size: 20px;
+	border-radius: 5px;
+	background-color: #64d697;
+	transition: 500ms;
 }
 
 #tutorial-btn-back {
-	border: 0px;
-	border-radius: 4px;
-	background-color: rgba(164, 84, 255, 0.75);
-	float: left;
+	position: absolute;
+	left: 2%;
+	bottom: 2%;
+	padding: 10px 15px;
+	font-size: 20px;
+	border-radius: 5px;
+	background-color: #64d697;
+	transition: 500ms;
+}
+
+#tutorial-btn-next:hover {
+  background-color: rgba(56, 255, 146, 0.75);
+}
+
+#tutorial-btn-back:hover {
+  background-color: rgba(56, 255, 146, 0.75);
 }
   
 @keyframes visitedAnimation {
