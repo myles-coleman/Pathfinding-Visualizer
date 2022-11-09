@@ -8,7 +8,8 @@ screen.height === 1440 ? START_NODE_COL = 9 : START_NODE_COL = 15;
 screen.height === 1440 ? FINISH_NODE_ROW = 23 : FINISH_NODE_ROW = 15;
 screen.height === 1440 ? FINISH_NODE_COL = 82 : FINISH_NODE_COL = 56;
 
-//function to create node object
+//creates node object
+//this function was sourced by Clément Mihailescu
 export const createNode = (col, row) => {
 	return {
 	  	col,

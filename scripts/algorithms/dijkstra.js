@@ -1,3 +1,6 @@
+//most of the code in this file is sourced from Clément Mihailescu
+//you can check out his github page here https://github.com/clementmihailescu/Pathfinding-Visualizer
+
 // Performs Dijkstra's algorithm; returns *all* nodes in the order
 // in which they were visited. Also makes nodes point back to their
 // previous node, effectively allowing us to compute the shortest path
@@ -6,7 +9,6 @@ export const dijkstra = (grid, startNode, finishNode) => {
 	const visitedNodesInOrder = [];
     const unvisitedNodes = getNodes(grid);
 	startNode.distance = 0;
-
     while (!!unvisitedNodes.length) {
 		sortNodesByDistance(unvisitedNodes);
 		const closestNode = unvisitedNodes.shift();

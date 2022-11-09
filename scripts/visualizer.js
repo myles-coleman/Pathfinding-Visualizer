@@ -1,7 +1,9 @@
 import {dijkstra, getNodesInShortestPathOrder, getNodes} from './algorithms/dijkstra.js';
 import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL} from './node.js';
+import { startTutorial } from './tutorial.js';
 
-//when changing height/width, multiply new number by size of node and put that for the height/width in the css of container div
+//height and width changes depending on screen size
+//currently only support 1080p and 1440p screen sizes
 let height;
 let width;
 screen.height === 1440 ? height = 46 : height = 32;
@@ -124,13 +126,13 @@ const eraseWalls = () => {
 		}
 	}
 }
-/*
+//prints nodes to the console
 const printNodes = (grid) => {
 	for (let i = 0; i < grid.length; i++) {
 		console.log(grid[i]);
 	}
 }
-*/
+
 const refreshGrid = () => {
 	document.getElementById("container").replaceChildren();
 	divGrid = [];
@@ -141,69 +143,7 @@ const refreshGrid = () => {
     console.log("grid refreshed");
 }
 
-const startTutorial = () => {
-
-	let page1 = document.createElement("div");
-	let page2 = document.createElement("div");
-	let title = document.createElement("h1");
-	let text = document.createElement("p");
-	let title2 = document.createElement("h1");
-	let text2 = document.createElement("p");
-	let text3 = document.createElement("p");
-
-	const image = "<img id='tutorial-img' src='../images/dijkstras.png' alt='dijkstras' >";
-	const image2 = "<img id='tutorial-img2' src='../images/walls.png' alt='wall buttons' >";
-	let backBtn = document.createElement("button");
-	let nextBtn = document.createElement("button");
-
-	page1.setAttribute('id',"tutorial");
-	title.setAttribute('id', "tutorial-title");
-	text.setAttribute('id', "tutorial-text");
-
-	page2.setAttribute('id',"tutorial");
-	title2.setAttribute('id', "tutorial-title");
-	text2.setAttribute('id', "tutorial-text");
-	text3.setAttribute('id', "tutorial-text");
-
-	backBtn.setAttribute('id', "tutorial-btn-back");
-	nextBtn.setAttribute('id', "tutorial-btn-next");
-	backBtn.setAttribute('type', "button");
-	nextBtn.setAttribute('type', "button");
-
-	title.innerHTML += "Pathfinding Visualizer Tutorial";
-	text.innerHTML += "This webapp uses Dijkstra's algorithm, a pathfinding algorithm, to calculate the shortest path between two nodes.";
-	
-	title2.innerHTML += "Understanding Walls and Nodes";
-	text2.innerHTML += "By default, holding down left click over the grid draws walls. Clicking the 'Erase Walls' button changes the functionality of holding down left click over the grid to then erase the walls. In order to go back to drawing walls, you will need to click the 'Draw Walls' button."
-	text3.innerHTML += "You can move both the starting node and the finish node anywhere on the grid.";
-
-	nextBtn.innerHTML += "next";
-	backBtn.innerHTML += "back";
-
-	nextBtn.addEventListener("click", () => {
-		document.body.replaceChild(page2, page1);
-	})
-
-	backBtn.addEventListener("click", () => {
-		document.body.replaceChild(page1, page2);
-	})
-	
-	//make a page 3 linking to github
-
-	page1.appendChild(title);
-	page1.appendChild(text);
-	page1.innerHTML += image;
-	page1.appendChild(nextBtn);
-
-	page2.appendChild(title2);
-	page2.appendChild(text2);
-	page2.innerHTML += image2;
-	page2.appendChild(text3);
-	page2.appendChild(backBtn);	
-
-	document.body.appendChild(page1);
-}
-
+//the next three dijkstra functions were sourced by Clément Mihailescu with some minor changes
 const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
 		if (i === visitedNodesInOrder.length) {
@@ -239,7 +179,7 @@ const visualizeDijkstra = () => {
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
 }
 
-//attatching methods to buttons with event listeners
+//attatching methods to buttons using event listeners
 document.getElementById("refresh").addEventListener("click", refreshGrid);
 
 document.getElementById("draw").addEventListener("click", () => {

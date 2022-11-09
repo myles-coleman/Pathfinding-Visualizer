@@ -80,9 +80,32 @@
 
 #tutorial-img2 {
 	height: auto;
-	width: 25%;
-	position: absolute;
-	left: 5%;
+	width: 11%;
+}
+
+#node-main-container {
+	text-align: center;
+}
+
+#node-container {
+	width: 40%;
+	display: inline-block;
+	text-align: center;
+}
+
+#tutorial-text-node {
+	float: left;
+	font-size: 24px;
+	color: #3e3e3e;
+	padding: 0px 20px;
+}
+
+#tutorial-node {
+	width: 40px;
+    height: 40px;
+    outline: 1px solid rgba(0, 202, 91, 0.75);
+	padding: 5px;
+	float: left;
 }
 
 #tutorial-btn-next {
@@ -91,7 +114,8 @@
 	bottom: 2%;
 	padding: 10px 15px;
 	font-size: 20px;
-	border-radius: 5px;
+	border: 0px;
+	border-radius: 3px;
 	background-color: #64d697;
 	transition: 500ms;
 }
@@ -102,17 +126,18 @@
 	bottom: 2%;
 	padding: 10px 15px;
 	font-size: 20px;
-	border-radius: 5px;
+	border: 0px;
+	border-radius: 3px;
 	background-color: #64d697;
 	transition: 500ms;
 }
 
 #tutorial-btn-next:hover {
-  background-color: rgba(56, 255, 146, 0.75);
+  	background-color: rgba(56, 255, 146, 0.75);
 }
 
 #tutorial-btn-back:hover {
-  background-color: rgba(56, 255, 146, 0.75);
+ 	background-color: rgba(56, 255, 146, 0.75);
 }
   
 @keyframes visitedAnimation {
@@ -168,7 +193,6 @@
 @media only screen and (max-height: 1080px) {
 
 	#container {
-
 		height: 800px;
 		width: 1800px;
 	}
