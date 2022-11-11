@@ -6,8 +6,8 @@ import { startTutorial } from './tutorial.js';
 //currently only support 1080p and 1440p screen sizes
 let height;
 let width;
-screen.height === 1440 ? height = 46 : height = 32;
-screen.height === 1440 ? width = 92 :  width = 72;
+screen.height > 1080 ? height = 46 : height = 32;
+screen.height > 1080 ? width = 92 :  width = 72;
 
 let startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 let finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
