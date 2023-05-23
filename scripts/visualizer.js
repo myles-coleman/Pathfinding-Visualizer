@@ -1,6 +1,7 @@
-import {dijkstra, getNodesInShortestPathOrder, getNodes} from './algorithms/dijkstra.js';
-import {createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL} from './node.js';
+import { createNode, START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL } from './node.js';
 import { startTutorial } from './tutorial.js';
+import { dijkstra, getNodesInShortestPathOrder, getNodes } from './algorithms/dijkstra.js';
+import { DFS } from './algorithms/depth-first-search.js'
 
 //height and width changes depending on screen size
 //currently only support 1080p and 1440p screen sizes
@@ -18,6 +19,7 @@ let finishNode;
 let startDivNode;
 let finishDivNode;
 let dragStart;
+let nodeId = 0;
 
 //creates grid and returns array of nodes and array of divNodes
 const createGrid = () => {
@@ -27,6 +29,8 @@ const createGrid = () => {
 	  	for (let col = 0; col < width; col++) {
 
 			let node = createNode(col, row);
+			node.id = nodeId;
+			nodeId++;
 			let divNode = document.createElement('div');
 			divNode.className = "node";
 			divNode.setAttribute('id',`node-${row}-${col}`);
@@ -137,14 +141,15 @@ const refreshGrid = () => {
 	document.getElementById("container").replaceChildren();
 	divGrid = [];
 	grid = [];
+	nodeId = 0;
     createGrid();
 	startIndex = (START_NODE_ROW * width) + START_NODE_COL + 1;
 	finishIndex = (FINISH_NODE_ROW * width) + FINISH_NODE_COL;
     console.log("grid refreshed");
 }
 
-//the next three dijkstra functions were sourced by Clément Mihailescu with some minor changes
-const animateDijkstra = (visitedNodesInOrder, nodesInShortestPathOrder) => {
+// animates visited neighbors
+const animate = (visitedNodesInOrder, nodesInShortestPathOrder) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
 		if (i === visitedNodesInOrder.length) {
 			setTimeout(() => {
@@ -176,8 +181,22 @@ const visualizeDijkstra = () => {
 	const finishNode = nodes[finishIndex];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    animate(visitedNodesInOrder, nodesInShortestPathOrder);
+	console.log(nodesInShortestPathOrder.length);
 }
+
+//implementing DFS
+const visualizeDFS = () => {
+	let nodes = getNodes(grid);
+	const startNode = nodes[startIndex];
+	const finishNode = nodes[finishIndex];
+    const visitedNodesInOrder = DFS(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    animate(visitedNodesInOrder, nodesInShortestPathOrder);
+	console.log(nodesInShortestPathOrder.length);
+}
+
+// next, we create deapth first search
 
 //attatching methods to buttons using event listeners
 document.getElementById("refresh").addEventListener("click", refreshGrid);
@@ -192,17 +211,22 @@ document.getElementById("eraser").addEventListener("click", () => {
 	console.log("eraser mode");
 });
 
-document.getElementById("visualize").addEventListener("click", () => {
+document.getElementById("visualize-dijkstra").addEventListener("click", () => {
 	visualizeDijkstra();
+	console.log("started visualization");
+});
+
+document.getElementById("visualize-dfs").addEventListener("click", () => {
+	visualizeDFS();
 	console.log("started visualization");
 });
 
 document.getElementById("start-tutorial").addEventListener("click", () => {
 	startTutorial();
 });
-/*
+
 document.getElementById("print").addEventListener("click", () => {
   	printNodes(grid);
 });
-*/
+
 window.onload = createGrid;

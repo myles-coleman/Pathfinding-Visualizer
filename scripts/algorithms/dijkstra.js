@@ -1,10 +1,3 @@
-//most of the code in this file is sourced from Clément Mihailescu
-//you can check out his github page here https://github.com/clementmihailescu/Pathfinding-Visualizer
-
-// Performs Dijkstra's algorithm; returns *all* nodes in the order
-// in which they were visited. Also makes nodes point back to their
-// previous node, effectively allowing us to compute the shortest path
-// by backtracking from the finish node.
 export const dijkstra = (grid, startNode, finishNode) => {
 	const visitedNodesInOrder = [];
     const unvisitedNodes = getNodes(grid);
@@ -12,16 +5,20 @@ export const dijkstra = (grid, startNode, finishNode) => {
     while (!!unvisitedNodes.length) {
 		sortNodesByDistance(unvisitedNodes);
 		const closestNode = unvisitedNodes.shift();
-		if (closestNode.isWall) continue; // If closestNode is a wall, we skip it and continue
-		// If the closestNode is at a distance of infinity, we are trapped so we return
-		if (closestNode.distance === Infinity) return visitedNodesInOrder;
+		if (closestNode.isWall) continue;
+		if (closestNode.distance === Infinity) {// If the closestNode is at a distance of infinity, we are trapped so we return
+			return visitedNodesInOrder;
+		}
 		closestNode.isVisited = true;
 		visitedNodesInOrder.push(closestNode);
-		if (closestNode === finishNode) return visitedNodesInOrder;
+		if (closestNode === finishNode) {
+			return visitedNodesInOrder;
+		}
 		updateUnvisitedNeighbors(closestNode, grid);
     }
 }
 
+// sorts array of unvisited nodes by shortest distance
 const sortNodesByDistance = (unvisitedNodes) => {
   	unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 }
@@ -78,7 +75,7 @@ export const getNodes = (grid) => {
 	return nodes;
 }
   
-// Starts from the finishNode and returns an array of nodes for the shortest path to the startNode.
+// returns array of nodes in the shortest path
 export const getNodesInShortestPathOrder = (finishNode) => {
 	const nodesInShortestPathOrder = [];
     let currentNode = finishNode;
