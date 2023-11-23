@@ -1,0 +1,34 @@
+name: Visualizer
+
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+
+        - name: checkout
+          uses: actions/checkout@v4
+      
+        - uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+
+        - name: Get the short SHA of the commit
+          id: get_sha
+          env:
+            GITHUB_SHA: ${{ github.sha }}
+            
+          run: echo "SHA=$(git rev-parse --short $GITHUB_SHA)" >> $GITHUB_ENV
+            
+        - name: build dockerfile
+          run:  docker build -t visualizer:${{ env.SHA }} .
+      
+        - name: run application
+          run:  sudo docker run -d -p 3000:3000 visualizer:${{ env.SHA }}
+
+        

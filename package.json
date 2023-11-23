@@ -1,0 +1,24 @@
+{
+  "name": "pathfinding-visualizer",
+  "version": "1.0.0",
+  "description": "Currently utilizes Dijkstra's and Depth first search algorithms to visualize the shortest path.  You can test out this project here https://pathfinding-visualizer-sand.vercel.app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myles-coleman/Pathfinding-Visualizer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myles-coleman/Pathfinding-Visualizer/issues"
+  },
+  "homepage": "https://github.com/myles-coleman/Pathfinding-Visualizer#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
