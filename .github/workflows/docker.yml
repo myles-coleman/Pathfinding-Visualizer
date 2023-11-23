@@ -27,8 +27,7 @@ jobs:
             
         - name: build dockerfile
           run:  docker build -t visualizer:${{ env.SHA }} .
-      
-        - name: run application
-          run:  sudo docker run -d -p 3000:3000 visualizer:${{ env.SHA }}
 
+        #add testing here
+            
         

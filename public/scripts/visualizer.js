@@ -196,8 +196,6 @@ const visualizeDFS = () => {
 	console.log(nodesInShortestPathOrder.length);
 }
 
-// next, we create deapth first search
-
 //attatching methods to buttons using event listeners
 document.getElementById("refresh").addEventListener("click", refreshGrid);
 
