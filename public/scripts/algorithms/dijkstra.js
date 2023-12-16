@@ -35,29 +35,26 @@ const updateUnvisitedNeighbors = (node, grid) => {
 // checks adjacent nodes and pushes them to an array if they haven't already been visisted
 export const getUnvisitedNeighbors = (node, grid) => {
     const neighbors = [];
-    const {col, row} = node;
-	let width; //this value needs to be changed based on the width defined in visualizer.js
-	screen.height > 1080 ? width = 92 : width = 72;
-	const nodeArr = getNodes(grid);
-	let index
-	if (row > 0) { // check if up
-		index = ((row - 1) * width) + col;
-		neighbors.push(nodeArr[index]);
-	}
-	if (row < grid.length - 1) { // check if down
-		index = ((row + 1) * width) + col;
-		neighbors.push(nodeArr[index]);
-	}
-	if (col > 0) { // check if left
-		index = (row * width) + (col - 1);
-		neighbors.push(nodeArr[index]);
-	}
-	if (col < grid[0].length - 1) { // check if right
-		index = (row * width) + (col + 1);
-		neighbors.push(nodeArr[index]);
-	}
-    return neighbors.filter(neighbor => !neighbor.isVisited);
-}
+    const { col, row } = node;
+    const width = grid[0].length;
+    const height = grid.length;
+
+    if (row > 0 && !grid[row - 1][col].isVisited && !grid[row - 1][col].isWall) {
+        neighbors.push(grid[row - 1][col]);
+    }
+    if (row < height - 1 && !grid[row + 1][col].isVisited && !grid[row + 1][col].isWall) {
+        neighbors.push(grid[row + 1][col]);
+    }
+    if (col > 0 && !grid[row][col - 1].isVisited && !grid[row][col - 1].isWall) {
+        neighbors.push(grid[row][col - 1]);
+    }
+    if (col < width - 1 && !grid[row][col + 1].isVisited && !grid[row][col + 1].isWall) {
+        neighbors.push(grid[row][col + 1]);
+    }
+
+    return neighbors;
+};
+
 
 // takes grid of nodes and returns 1D array of nodes
 export const getNodes = (grid) => {

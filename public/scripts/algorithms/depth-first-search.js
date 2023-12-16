@@ -5,39 +5,54 @@ export const DFS = (grid, startNode, finishNode) => {
     const visitedNodesInOrder = [];
     const nodes = getNodes(grid);
     let time = 0;
-    for (let i = startNode.id; i < nodes.length; i++) {
+
+    for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
         node.isVisited = false;
-        node.previousNode = null;    
+        node.previousNode = null;
     }
-    for (let i = startNode.id; i < nodes.length; i++) {
-        const closestNode = nodes[i];
-		if (closestNode.isWall) continue;
-        if (!closestNode.isVisited) {
-            time = DFSVisit(closestNode.id, time, grid);   
-        }
-	    visitedNodesInOrder.push(closestNode);
-        if (closestNode === finishNode) {
-			return visitedNodesInOrder;
-		}
-    }
-}
+    DFSVisit(startNode, time, grid, visitedNodesInOrder, finishNode);
+    const path = reconstructPath(finishNode);
+    return path;
+};
 
-const DFSVisit = (sourceId, time, grid) => {
+const DFSVisit = (node, time, grid, visitedNodesInOrder, finishNode) => {
     time++;
-    const nodes = getNodes(grid);
-    const closestNode = nodes[sourceId];
-    closestNode.discovered = time;
-    closestNode.isVisited = true;
-    const neighbors = getUnvisitedNeighbors(closestNode, grid);
+    const neighbors = getUnvisitedNeighbors(node, grid);
+
+    node.discovered = time;
+    node.isVisited = true;
+
+    visitedNodesInOrder.push(node);
+
+    if (node === finishNode) {
+        return time;
+    }
+
     for (let i = 0; i < neighbors.length; i++) {
-        const v = neighbors[i];
-        if (!v.isVisited) {
-            v.previousNode = closestNode;
-            time = DFSVisit(v.id, time, grid);
+        const neighbor = neighbors[i];
+        if (!neighbor.isVisited) {
+            // Assigning discovered node as previousNode
+            neighbor.previousNode = node;
+            time = DFSVisit(neighbor, time, grid, visitedNodesInOrder, finishNode);
         }
     }
+
     time++;
-    closestNode.finished = time;
+    node.finished = time;
+
     return time;
-}
+};
+
+// Reconstruct the path in the correct order
+const reconstructPath = (finishNode) => {
+    const path = [];
+    let currentNode = finishNode;
+
+    while (currentNode !== null) {
+        path.unshift(currentNode);
+        currentNode = currentNode.previousNode;
+    }
+
+    return path;
+};
